@@ -108,6 +108,3 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   $<INSTALL_INTERFACE:include>
 )
 
-add_subdirectory(docs)
-add_subdirectory(tests)
-add_subdirectory(tutorial)
