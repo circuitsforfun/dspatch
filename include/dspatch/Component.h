@@ -105,7 +105,8 @@ public:
     void SetBufferCount( int bufferCount );
     int GetBufferCount() const;
 
-    virtual void UpdateGui(void *context) = 0;
+    virtual bool HasGui(int interface) = 0;
+    virtual void UpdateGui(void *context, int interface) = 0;
 
     bool Tick( TickMode mode = TickMode::Parallel, int bufferNo = 0 );
     void Reset( int bufferNo = 0 );
