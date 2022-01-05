@@ -102,11 +102,18 @@ public:
     std::string GetInputName( int inputNo ) const;
     std::string GetOutputName( int outputNo ) const;
 
+    std::string GetComponentName() const;
+    std::string GetComponentCategory() const;
+    std::string GetComponentAuthor() const;
+    std::string GetComponentVersion() const;
+
     void SetBufferCount( int bufferCount );
     int GetBufferCount() const;
 
     virtual bool HasGui(int interface) = 0;
     virtual void UpdateGui(void *context, int interface) = 0;
+    virtual std::string GetState() = 0;
+    virtual void SetState(std::string &&json_serialized) = 0;
 
     bool Tick( TickMode mode = TickMode::Parallel, int bufferNo = 0 );
     void Reset( int bufferNo = 0 );
@@ -117,8 +124,17 @@ protected:
     void SetInputCount_( int inputCount, std::vector<std::string> const& inputNames = {} );
     void SetOutputCount_( int outputCount, std::vector<std::string> const& outputNames = {} );
 
+    void SetComponentName_(std::string component_name);
+    void SetComponentCategory_(std::string component_category);
+    void SetComponentAuthor_(std::string component_author);
+    void SetComponentVersion_(std::string component_version);
+
 private:
     std::unique_ptr<internal::Component> p;
+    std::string name_;
+    std::string category_;
+    std::string author_;
+    std::string version_;
 };
 
 }  // namespace DSPatch

@@ -33,6 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <condition_variable>
 #include <unordered_set>
+#include <utility>
 
 using namespace DSPatch;
 
@@ -400,6 +401,46 @@ void Component::SetOutputCount_( int outputCount, std::vector<std::string> const
             }
         }
     }
+}
+
+void Component::SetComponentName_(std::string component_name)
+{
+    name_ = std::move(component_name);
+}
+
+void Component::SetComponentCategory_(std::string component_category)
+{
+    category_ = std::move(component_category);
+}
+
+void Component::SetComponentAuthor_(std::string component_author)
+{
+    author_ = std::move(component_author);
+}
+
+void Component::SetComponentVersion_(std::string component_version)
+{
+    version_ = std::move(component_version);
+}
+
+std::string Component::GetComponentName() const
+{
+    return name_;
+}
+
+std::string Component::GetComponentCategory() const
+{
+    return category_;
+}
+
+std::string Component::GetComponentAuthor() const
+{
+    return author_;
+}
+
+std::string Component::GetComponentVersion() const
+{
+    return version_;
 }
 
 void internal::Component::WaitForRelease( int threadNo )
