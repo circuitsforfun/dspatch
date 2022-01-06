@@ -106,6 +106,8 @@ public:
     std::string GetComponentCategory() const;
     std::string GetComponentAuthor() const;
     std::string GetComponentVersion() const;
+    int GetInstanceCount() const;
+    void SetInstanceCount(int num);
 
     void SetBufferCount( int bufferCount );
     int GetBufferCount() const;
@@ -132,6 +134,7 @@ protected:
 private:
     std::unique_ptr<internal::Component> p;
     std::string name_;
+    int instance_count_;
     std::string category_;
     std::string author_;
     std::string version_;

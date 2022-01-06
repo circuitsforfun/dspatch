@@ -423,6 +423,10 @@ void Component::SetComponentVersion_(std::string component_version)
     version_ = std::move(component_version);
 }
 
+void Component::SetInstanceCount(int num) {
+    instance_count_ = num;
+}
+
 std::string Component::GetComponentName() const
 {
     return name_;
@@ -441,6 +445,11 @@ std::string Component::GetComponentAuthor() const
 std::string Component::GetComponentVersion() const
 {
     return version_;
+}
+
+int Component::GetInstanceCount() const
+{
+    return instance_count_;
 }
 
 void internal::Component::WaitForRelease( int threadNo )
