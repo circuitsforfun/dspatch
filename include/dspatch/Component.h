@@ -29,15 +29,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
 #include <dspatch/SignalBus.h>
+#include <DSPatch_Types.hpp>
 
 #include <string>
+#include <unordered_map>
 
 namespace DSPatch
 {
-
 namespace internal
 {
-class Component;
+    class Component;
 }  // namespace internal
 
 /// Abstract base class for DSPatch components
@@ -101,9 +102,11 @@ public:
 
     std::string GetInputName( int inputNo ) const;
     std::string GetOutputName( int outputNo ) const;
+    IoType GetInputType( int inputNo ) const;
+    IoType GetOutputType( int outputNo ) const;
 
     std::string GetComponentName() const;
-    std::string GetComponentCategory() const;
+    Category GetComponentCategory() const;
     std::string GetComponentAuthor() const;
     std::string GetComponentVersion() const;
     int GetInstanceCount() const;
@@ -123,11 +126,11 @@ public:
 protected:
     virtual void Process_( SignalBus const&, SignalBus& ) = 0;
 
-    void SetInputCount_( int inputCount, std::vector<std::string> const& inputNames = {} );
-    void SetOutputCount_( int outputCount, std::vector<std::string> const& outputNames = {} );
+    void SetInputCount_( int inputCount, std::vector<std::string> const& inputNames = {}, std::vector<IoType> const& inputTypes = {} );
+    void SetOutputCount_( int outputCount, std::vector<std::string> const& outputNames = {}, std::vector<IoType> const& outputTypes = {} );
 
     void SetComponentName_(std::string component_name);
-    void SetComponentCategory_(std::string component_category);
+    void SetComponentCategory_(Category component_category);
     void SetComponentAuthor_(std::string component_author);
     void SetComponentVersion_(std::string component_version);
 
@@ -135,7 +138,7 @@ private:
     std::unique_ptr<internal::Component> p;
     std::string name_;
     int instance_count_;
-    std::string category_;
+    Category category_;
     std::string author_;
     std::string version_;
 };

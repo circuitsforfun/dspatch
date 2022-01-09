@@ -33,11 +33,13 @@ enable_testing()
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/DSPatch_Managers/Common
 )
 
 file(GLOB root_hdrs include/*.h)
 file(GLOB dspatch_hdrs include/dspatch/*.h)
 file(GLOB srcs src/*.cpp src/internal/*.cpp)
+list(APPEND srcs ${CMAKE_SOURCE_DIR}/DSPatch_Managers/Common/DSPatch_Types.cpp)
 
 option(BUILD_STATIC "Build static library" OFF)
 

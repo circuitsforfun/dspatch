@@ -87,6 +87,8 @@ public:
 
     std::vector<std::string> inputNames;
     std::vector<std::string> outputNames;
+    std::vector<IoType> inputTypes;
+    std::vector<IoType> outputTypes;
 };
 
 }  // namespace internal
@@ -191,6 +193,24 @@ std::string Component::GetOutputName( int outputNo ) const
         return p->outputNames[outputNo];
     }
     return "";
+}
+
+IoType Component::GetInputType( int inputNo ) const
+{
+    if ( inputNo < (int)p->inputTypes.size() )
+    {
+        return p->inputTypes[inputNo];
+    }
+    return IoType::Io_Type_Unspecified;
+}
+
+IoType Component::GetOutputType( int outputNo ) const
+{
+    if ( outputNo < (int)p->outputTypes.size() )
+    {
+        return p->outputTypes[outputNo];
+    }
+    return IoType::Io_Type_Unspecified;
 }
 
 void Component::SetBufferCount( int bufferCount )
@@ -365,9 +385,10 @@ void Component::Reset( int bufferNo )
     p->tickStatuses[bufferNo] = internal::Component::TickStatus::NotTicked;
 }
 
-void Component::SetInputCount_( int inputCount, std::vector<std::string> const& inputNames )
+void Component::SetInputCount_( int inputCount, std::vector<std::string> const& inputNames, std::vector<IoType> const& inputTypes )
 {
     p->inputNames = inputNames;
+    p->inputTypes = inputTypes;
 
     for ( auto& inputBus : p->inputBuses )
     {
@@ -375,9 +396,10 @@ void Component::SetInputCount_( int inputCount, std::vector<std::string> const& 
     }
 }
 
-void Component::SetOutputCount_( int outputCount, std::vector<std::string> const& outputNames )
+void Component::SetOutputCount_( int outputCount, std::vector<std::string> const& outputNames, std::vector<IoType> const& outputTypes )
 {
     p->outputNames = outputNames;
+    p->outputTypes = outputTypes;
 
     for ( auto& outputBus : p->outputBuses )
     {
@@ -408,9 +430,9 @@ void Component::SetComponentName_(std::string component_name)
     name_ = std::move(component_name);
 }
 
-void Component::SetComponentCategory_(std::string component_category)
+void Component::SetComponentCategory_(Category component_category)
 {
-    category_ = std::move(component_category);
+    category_ = component_category;
 }
 
 void Component::SetComponentAuthor_(std::string component_author)
@@ -432,7 +454,7 @@ std::string Component::GetComponentName() const
     return name_;
 }
 
-std::string Component::GetComponentCategory() const
+Category Component::GetComponentCategory() const
 {
     return category_;
 }
