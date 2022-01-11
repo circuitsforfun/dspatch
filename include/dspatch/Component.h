@@ -109,6 +109,8 @@ public:
     Category GetComponentCategory() const;
     std::string GetComponentAuthor() const;
     std::string GetComponentVersion() const;
+    void SetEnabled(bool enabled);
+    bool IsEnabled();
     int GetInstanceCount() const;
     void SetInstanceCount(int num);
 
@@ -141,6 +143,7 @@ private:
     Category category_;
     std::string author_;
     std::string version_;
+    bool isEnabled_;
 };
 
 }  // namespace DSPatch

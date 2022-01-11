@@ -97,6 +97,7 @@ public:
 Component::Component( ProcessOrder processOrder )
     : p( new internal::Component( processOrder ) )
 {
+    isEnabled_ = true;
     SetBufferCount( 1 );
 }
 
@@ -472,6 +473,16 @@ std::string Component::GetComponentVersion() const
 int Component::GetInstanceCount() const
 {
     return instance_count_;
+}
+
+void Component::SetEnabled(bool enabled)
+{
+    isEnabled_ = enabled;
+}
+
+bool Component::IsEnabled()
+{
+    return isEnabled_;
 }
 
 void internal::Component::WaitForRelease( int threadNo )
