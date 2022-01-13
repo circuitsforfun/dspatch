@@ -87,8 +87,8 @@ public:
 
     std::vector<std::string> inputNames;
     std::vector<std::string> outputNames;
-    std::vector<FlowCV::IoType> inputTypes;
-    std::vector<FlowCV::IoType> outputTypes;
+    std::vector<IoType> inputTypes;
+    std::vector<IoType> outputTypes;
 };
 
 }  // namespace internal
@@ -196,22 +196,22 @@ std::string Component::GetOutputName( int outputNo ) const
     return "";
 }
 
-FlowCV::IoType Component::GetInputType( int inputNo ) const
+IoType Component::GetInputType( int inputNo ) const
 {
     if ( inputNo < (int)p->inputTypes.size() )
     {
         return p->inputTypes[inputNo];
     }
-    return FlowCV::IoType::Io_Type_Unspecified;
+    return IoType::Io_Type_Unspecified;
 }
 
-FlowCV::IoType Component::GetOutputType( int outputNo ) const
+IoType Component::GetOutputType( int outputNo ) const
 {
     if ( outputNo < (int)p->outputTypes.size() )
     {
         return p->outputTypes[outputNo];
     }
-    return FlowCV::IoType::Io_Type_Unspecified;
+    return IoType::Io_Type_Unspecified;
 }
 
 void Component::SetBufferCount( int bufferCount )
@@ -386,7 +386,7 @@ void Component::Reset( int bufferNo )
     p->tickStatuses[bufferNo] = internal::Component::TickStatus::NotTicked;
 }
 
-void Component::SetInputCount_( int inputCount, std::vector<std::string> const& inputNames, std::vector<FlowCV::IoType> const& inputTypes )
+void Component::SetInputCount_( int inputCount, std::vector<std::string> const& inputNames, std::vector<IoType> const& inputTypes )
 {
     p->inputNames = inputNames;
     p->inputTypes = inputTypes;
@@ -397,7 +397,7 @@ void Component::SetInputCount_( int inputCount, std::vector<std::string> const& 
     }
 }
 
-void Component::SetOutputCount_( int outputCount, std::vector<std::string> const& outputNames, std::vector<FlowCV::IoType> const& outputTypes )
+void Component::SetOutputCount_( int outputCount, std::vector<std::string> const& outputNames, std::vector<IoType> const& outputTypes )
 {
     p->outputNames = outputNames;
     p->outputTypes = outputTypes;
@@ -431,7 +431,7 @@ void Component::SetComponentName_(std::string component_name)
     name_ = std::move(component_name);
 }
 
-void Component::SetComponentCategory_(FlowCV::Category component_category)
+void Component::SetComponentCategory_(Category component_category)
 {
     category_ = component_category;
 }
@@ -455,7 +455,7 @@ std::string Component::GetComponentName() const
     return name_;
 }
 
-FlowCV::Category Component::GetComponentCategory() const
+Category Component::GetComponentCategory() const
 {
     return category_;
 }

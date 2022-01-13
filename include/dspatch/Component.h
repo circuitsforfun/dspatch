@@ -29,7 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
 #include <dspatch/SignalBus.h>
-#include <FlowCV_Types.hpp>
+#include <dspatch/ComponentTypes.hpp>
 
 #include <string>
 #include <unordered_map>
@@ -102,11 +102,11 @@ public:
 
     std::string GetInputName( int inputNo ) const;
     std::string GetOutputName( int outputNo ) const;
-    FlowCV::IoType GetInputType( int inputNo ) const;
-    FlowCV::IoType GetOutputType( int outputNo ) const;
+    IoType GetInputType( int inputNo ) const;
+    IoType GetOutputType( int outputNo ) const;
 
     std::string GetComponentName() const;
-    FlowCV::Category GetComponentCategory() const;
+    Category GetComponentCategory() const;
     std::string GetComponentAuthor() const;
     std::string GetComponentVersion() const;
     void SetEnabled(bool enabled);
@@ -128,11 +128,11 @@ public:
 protected:
     virtual void Process_( SignalBus const&, SignalBus& ) = 0;
 
-    void SetInputCount_( int inputCount, std::vector<std::string> const& inputNames = {}, std::vector<FlowCV::IoType> const& inputTypes = {} );
-    void SetOutputCount_( int outputCount, std::vector<std::string> const& outputNames = {}, std::vector<FlowCV::IoType> const& outputTypes = {} );
+    void SetInputCount_( int inputCount, std::vector<std::string> const& inputNames = {}, std::vector<IoType> const& inputTypes = {} );
+    void SetOutputCount_( int outputCount, std::vector<std::string> const& outputNames = {}, std::vector<IoType> const& outputTypes = {} );
 
     void SetComponentName_(std::string component_name);
-    void SetComponentCategory_(FlowCV::Category component_category);
+    void SetComponentCategory_(Category component_category);
     void SetComponentAuthor_(std::string component_author);
     void SetComponentVersion_(std::string component_version);
 
@@ -140,7 +140,7 @@ private:
     std::unique_ptr<internal::Component> p;
     std::string name_;
     int instance_count_;
-    FlowCV::Category category_;
+    Category category_;
     std::string author_;
     std::string version_;
     bool isEnabled_;
